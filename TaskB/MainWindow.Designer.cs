@@ -39,6 +39,7 @@
             // 
             // DirectorySelector
             // 
+            this.DirectorySelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.DirectorySelector.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DirectorySelector.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DirectorySelector.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -50,6 +51,7 @@
             // 
             // FiletypeSelector
             // 
+            this.FiletypeSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.FiletypeSelector.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.FiletypeSelector.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FiletypeSelector.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -61,6 +63,7 @@
             // 
             // StringLabel
             // 
+            this.StringLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.StringLabel.Location = new System.Drawing.Point(12, 108);
             this.StringLabel.Name = "StringLabel";
             this.StringLabel.Size = new System.Drawing.Size(121, 23);
@@ -70,6 +73,7 @@
             // 
             // StringBox
             // 
+            this.StringBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.StringBox.Location = new System.Drawing.Point(12, 134);
             this.StringBox.Name = "StringBox";
             this.StringBox.Size = new System.Drawing.Size(345, 243);
@@ -78,6 +82,7 @@
             // 
             // SearchButton
             // 
+            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SearchButton.Location = new System.Drawing.Point(12, 395);
             this.SearchButton.Name = "SearchButton";
@@ -88,6 +93,7 @@
             // 
             // FoundList
             // 
+            this.FoundList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.FoundList.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.FoundList.ForeColor = System.Drawing.SystemColors.Window;
             this.FoundList.Location = new System.Drawing.Point(388, 25);
@@ -107,6 +113,7 @@
             this.Controls.Add(this.FiletypeSelector);
             this.Controls.Add(this.DirectorySelector);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "TaskB";
             this.Load += new System.EventHandler(this.MainWindow_Load);
