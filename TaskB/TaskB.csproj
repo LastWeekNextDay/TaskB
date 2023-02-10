@@ -46,7 +46,14 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Addables\FoundInFileLabelMain.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Addables\FoundInFileLabelMain.Designer.cs">
+          <DependentUpon>FoundInFileLabelMain.cs</DependentUpon>
+        </Compile>
         <Compile Include="DirectoryManager.cs" />
+        <Compile Include="FileReader.cs" />
         <Compile Include="MainWindow.cs">
             <SubType>Form</SubType>
         </Compile>

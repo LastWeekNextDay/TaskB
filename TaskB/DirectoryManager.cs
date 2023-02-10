@@ -4,19 +4,12 @@ using System.Collections.Generic;
 
 namespace TaskB
 {
-    public class DirectoryManager
+    public static class DirectoryManager
     {
-        public string SelectedDirectory { get; set; }
-        public string[] FileList { get; set; }
-
-        DirectoryManager()
+        public static string[] ReturnFilesInDirectoryOfFiletype(string directory, string filetype)
         {
-            SelectedDirectory = "";
-        }
-        
-        public void SearchForFiletype(string filetype)
-        {
-            FileList = Directory.GetFiles(SelectedDirectory, "*" + filetype);
+            string[] fileList = Directory.GetFiles(directory, "*" + filetype);
+            return fileList;
         }
     }
 }

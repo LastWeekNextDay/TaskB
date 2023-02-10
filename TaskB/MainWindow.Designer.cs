@@ -35,11 +35,13 @@
             this.StringBox = new System.Windows.Forms.RichTextBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.FoundList = new System.Windows.Forms.Label();
+            this.MultithreadCheckbox = new System.Windows.Forms.CheckBox();
+            this.RuntimeLabel = new System.Windows.Forms.Label();
+            this.RuntimeTimeTextLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // DirectorySelector
             // 
-            this.DirectorySelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.DirectorySelector.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DirectorySelector.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DirectorySelector.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -51,7 +53,6 @@
             // 
             // FiletypeSelector
             // 
-            this.FiletypeSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.FiletypeSelector.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.FiletypeSelector.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FiletypeSelector.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -63,7 +64,6 @@
             // 
             // StringLabel
             // 
-            this.StringLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.StringLabel.Location = new System.Drawing.Point(12, 108);
             this.StringLabel.Name = "StringLabel";
             this.StringLabel.Size = new System.Drawing.Size(121, 23);
@@ -73,16 +73,14 @@
             // 
             // StringBox
             // 
-            this.StringBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.StringBox.Location = new System.Drawing.Point(12, 134);
             this.StringBox.Name = "StringBox";
-            this.StringBox.Size = new System.Drawing.Size(345, 243);
+            this.StringBox.Size = new System.Drawing.Size(345, 130);
             this.StringBox.TabIndex = 4;
             this.StringBox.Text = "";
             // 
             // SearchButton
             // 
-            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SearchButton.Location = new System.Drawing.Point(12, 395);
             this.SearchButton.Name = "SearchButton";
@@ -101,11 +99,40 @@
             this.FoundList.Size = new System.Drawing.Size(387, 413);
             this.FoundList.TabIndex = 6;
             // 
+            // MultithreadCheckbox
+            // 
+            this.MultithreadCheckbox.Location = new System.Drawing.Point(12, 282);
+            this.MultithreadCheckbox.Name = "MultithreadCheckbox";
+            this.MultithreadCheckbox.Size = new System.Drawing.Size(121, 24);
+            this.MultithreadCheckbox.TabIndex = 7;
+            this.MultithreadCheckbox.Text = "Multithreading";
+            this.MultithreadCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // RuntimeLabel
+            // 
+            this.RuntimeLabel.Location = new System.Drawing.Point(207, 369);
+            this.RuntimeLabel.Name = "RuntimeLabel";
+            this.RuntimeLabel.Size = new System.Drawing.Size(65, 23);
+            this.RuntimeLabel.TabIndex = 8;
+            this.RuntimeLabel.Text = "Runtime:";
+            // 
+            // RuntimeTimeTextLabel
+            // 
+            this.RuntimeTimeTextLabel.Location = new System.Drawing.Point(278, 369);
+            this.RuntimeTimeTextLabel.Name = "RuntimeTimeTextLabel";
+            this.RuntimeTimeTextLabel.Size = new System.Drawing.Size(79, 23);
+            this.RuntimeTimeTextLabel.TabIndex = 9;
+            this.RuntimeTimeTextLabel.Text = "0";
+            this.RuntimeTimeTextLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.RuntimeTimeTextLabel);
+            this.Controls.Add(this.RuntimeLabel);
+            this.Controls.Add(this.MultithreadCheckbox);
             this.Controls.Add(this.FoundList);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.StringBox);
@@ -119,6 +146,10 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.CheckBox MultithreadCheckbox;
+        private System.Windows.Forms.Label RuntimeLabel;
+        private System.Windows.Forms.Label RuntimeTimeTextLabel;
 
         private System.Windows.Forms.Label FoundList;
 
