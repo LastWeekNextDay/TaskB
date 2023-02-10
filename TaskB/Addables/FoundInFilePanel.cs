@@ -15,13 +15,19 @@ namespace TaskB.Addables
             Label lblFileName = new Label();
             lblFileName.Text = FileName;
             lblFileName.Dock = DockStyle.Top;
+            lblFileName.BorderStyle = BorderStyle.FixedSingle;
+            lblFileName.ForeColor = Color.Black;
+            lblFileName.AutoSize = false;
+            lblFileName.Size = new Size(100, 50);
 
             // Create a label for "STRING FOUND"
             Label lblStringFound = new Label();
             lblStringFound.Text = StringFound;
-            lblStringFound.Dock = DockStyle.Left;
+            lblStringFound.Dock = DockStyle.Bottom;
+            lblStringFound.TextAlign = ContentAlignment.MiddleCenter;
             lblStringFound.AutoSize = false;
-            
+            lblStringFound.Size = new Size(100, 50);
+
             // Create a button for "OPEN FILE"
             Button btnOpenFile = new Button();
             btnOpenFile.Text = "OPEN FILE";
@@ -36,15 +42,15 @@ namespace TaskB.Addables
             pnlContainer.Dock = DockStyle.Fill;
             pnlContainer.BackColor = Color.White;
             pnlContainer.BorderStyle = BorderStyle.FixedSingle;
-            
+            pnlContainer.ForeColor = Color.Black;
 
             // Add the panel to the form
             Controls.Add(pnlContainer);
             
             // set minimum size
-            MinimumSize = new Size(378, 50);
+            MinimumSize = new Size(250, 150);
             // set maximum size
-            MaximumSize = new Size(378, 50);
+            MaximumSize = new Size(250, 150);
         }
 
         public FoundInFilePanel(IContainer container)

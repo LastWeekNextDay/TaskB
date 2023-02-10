@@ -120,21 +120,26 @@
             this.RuntimeTimeTextLabel.Name = "RuntimeTimeTextLabel";
             this.RuntimeTimeTextLabel.Size = new System.Drawing.Size(79, 23);
             this.RuntimeTimeTextLabel.TabIndex = 9;
-            this.RuntimeTimeTextLabel.Text = "0";
+            this.RuntimeTimeTextLabel.Text = "0 ms";
             this.RuntimeTimeTextLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(392, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(378, 374);
             this.flowLayoutPanel1.TabIndex = 10;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // numericUpDownBefore
             // 
             this.numericUpDownBefore.Location = new System.Drawing.Point(13, 350);
+            this.numericUpDownBefore.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             this.numericUpDownBefore.Name = "numericUpDownBefore";
             this.numericUpDownBefore.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownBefore.TabIndex = 11;
@@ -143,6 +148,7 @@
             // numericUpDownAfter
             // 
             this.numericUpDownAfter.Location = new System.Drawing.Point(237, 350);
+            this.numericUpDownAfter.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             this.numericUpDownAfter.Name = "numericUpDownAfter";
             this.numericUpDownAfter.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownAfter.TabIndex = 12;

@@ -109,14 +109,25 @@ namespace TaskB
                 // Loop through all files
                 foreach (string file in files)
                 {
-                    // TODO: Make this multithreaded
+                    // Check if returned string is not empty
+                    if (FileReader.ReadFileAndReturnString(file, StringBox.Text, (int)numericUpDownBefore.Value,
+                            (int)numericUpDownAfter.Value) != "")
+                    {
+                        // Create a new FoundInFilePanel
+                        FoundInFilePanel foundInFilePanel = new FoundInFilePanel(file,
+                            FileReader.ReadFileAndReturnString(file, StringBox.Text, (int)numericUpDownBefore.Value,
+                                (int)numericUpDownAfter.Value));
+                        // add the panel to the flow layout panel
+                        flowLayoutPanel1.Controls.Add(foundInFilePanel);
+                    }
                 }
                 // Wait for threads to finish
-                Task.WaitAll();
+                //Task.WaitAll();
                 // Stop timer
                 stopwatch.Stop();
-                // Change runtime time text to show time taken
-                RuntimeTimeTextLabel.Text = stopwatch.ElapsedMilliseconds.ToString();
+                // Change runtime time text to show time taken as "time ms"
+                RuntimeTimeTextLabel.Text = $"{stopwatch.ElapsedMilliseconds} ms";
+                
             }  
             else
             {
@@ -146,8 +157,8 @@ namespace TaskB
                 }
                 // Stop timer
                 stopwatch.Stop();
-                // Change runtime time text to show time taken
-                RuntimeTimeTextLabel.Text = stopwatch.ElapsedMilliseconds.ToString();
+                // Change runtime time text to show time taken as "time ms"
+                RuntimeTimeTextLabel.Text = $"{stopwatch.ElapsedMilliseconds} ms";
             }
         }
 
