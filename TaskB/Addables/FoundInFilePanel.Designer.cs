@@ -2,14 +2,15 @@
 
 namespace TaskB.Addables
 {
-    partial class FoundInFileLabelMain
+    partial class FoundInFilePanel
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
 
-        /// <summary>
+        
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -23,7 +24,7 @@ namespace TaskB.Addables
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -31,10 +32,6 @@ namespace TaskB.Addables
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FoundInFileLabelMain";
         }
 
         #endregion

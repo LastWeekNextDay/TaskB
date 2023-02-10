@@ -1,0 +1,5 @@
+﻿.txt
+.cfg
+.csv
+.ini
+.log

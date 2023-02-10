@@ -46,24 +46,30 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Addables\FoundInFileLabelMain.cs">
-          <SubType>Form</SubType>
+        <Compile Include="Addables\FoundInFilePanel.cs">
+          <SubType>Component</SubType>
         </Compile>
-        <Compile Include="Addables\FoundInFileLabelMain.Designer.cs">
-          <DependentUpon>FoundInFileLabelMain.cs</DependentUpon>
+        <Compile Include="Addables\FoundInFilePanel.Designer.cs">
+          <DependentUpon>FoundInFilePanel.cs</DependentUpon>
         </Compile>
-        <Compile Include="DirectoryManager.cs" />
-        <Compile Include="FileReader.cs" />
-        <Compile Include="MainWindow.cs">
-            <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="MainWindow.Designer.cs">
-            <DependentUpon>MainWindow.cs</DependentUpon>
-        </Compile>
+        <Compile Include="Functions\DirectoryManager.cs" />
+        <Compile Include="Functions\FileReader.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <EmbeddedResource Include="MainWindow.resx">
+        <Compile Include="Windows\FiletypeListWindow.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Windows\FiletypeListWindow.Designer.cs">
+          <DependentUpon>FiletypeListWindow.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Windows\MainWindow.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="Windows\MainWindow.Designer.cs">
           <DependentUpon>MainWindow.cs</DependentUpon>
+        </Compile>
+        <EmbeddedResource Include="Addables\FoundInFilePanel.resx">
+          <DependentUpon>FoundInFilePanel.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
@@ -74,6 +80,12 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="Windows\FiletypeListWindow.resx">
+          <DependentUpon>FiletypeListWindow.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Windows\MainWindow.resx">
+          <DependentUpon>MainWindow.cs</DependentUpon>
+        </EmbeddedResource>
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
             <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -86,6 +98,9 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="FileTypes.txt" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
