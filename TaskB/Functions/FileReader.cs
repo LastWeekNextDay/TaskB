@@ -14,12 +14,12 @@ namespace TaskB
             // in the file before and after the textToFind to the variable and return it
             if (index > -1)
             {
-                // if there is not enough character before the textToFind, add the maximum available amount
+                // if there is not enough characters before the textToFind, add the maximum available amount
                 if (index - lengthBefore < 0)
                 {
                     lengthBefore = index;
                 }
-                // if there is not enough character after the textToFind, add the maximum available amount
+                // if there is not enough characters after the textToFind, add the maximum available amount
                 if (index + textToFind.Length + lengthAfter > fileText.Length)
                 {
                     lengthAfter = fileText.Length - (index + textToFind.Length);

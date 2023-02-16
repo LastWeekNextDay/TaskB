@@ -54,6 +54,7 @@
         </Compile>
         <Compile Include="Functions\DirectoryManager.cs" />
         <Compile Include="Functions\FileReader.cs" />
+        <Compile Include="Functions\Logger.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Windows\FiletypeListWindow.cs">
