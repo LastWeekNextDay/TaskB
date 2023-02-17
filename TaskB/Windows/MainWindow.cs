@@ -76,6 +76,9 @@ namespace TaskB
                 IsSearching = true;
             }
 
+            // Set search button text to "Searching..."
+            SearchButton.Text = "Searching...";
+
             // Start timer
             System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
@@ -86,14 +89,16 @@ namespace TaskB
             // Check if multithreading is checked
             if (MultithreadCheckBox.Checked)
             {
-                // Create an thread-safe list of files
-                ConcurrentBag<string> files = new ConcurrentBag<string>();
-
                 // Create a thread-safe list that holds the filename and the string that was found
-                ConcurrentBag<Tuple<string, string>> results = new ConcurrentBag<Tuple<string, string>>();
+                BlockingCollection<Tuple<string, string>> results = new BlockingCollection<Tuple<string, string>>();
 
                 // Create a thread-safe list of threads
-                ConcurrentBag<System.Threading.Thread> threads = new ConcurrentBag<System.Threading.Thread>();
+                List<System.Threading.Thread> threads = new List<System.Threading.Thread>();
+                
+                // Assign numericUpDownBefore, numericUpDownAfter and text of stringbox to variables
+                int before = (int)numericUpDownBefore.Value;
+                int after = (int)numericUpDownAfter.Value;
+                string stringBoxText = StringBox.Text;
 
                 // Loop through all filetypes
                 foreach (string filetype in SelectedFiletypes)
@@ -102,10 +107,17 @@ namespace TaskB
                     System.Threading.Thread thread = new System.Threading.Thread(() =>
                     {
                         // Loop through found files of filetype
-                        foreach (string file in Directory.GetFiles(FolderPath, $"*.{filetype}").ToArray())
+                        foreach (string file in Directory.GetFiles(FolderPath, $"*{filetype}"))
                         {
-                            // Add the file to the list of files
-                            files.Add(file);
+                            // Assign return value of FileReader.ReadFileAndReturnString to variable
+                            string returnedString = FileReader.ReadFileAndReturnString(file, stringBoxText, before, after);
+                            
+                            // Check if file contains stringBoxText
+                            if (returnedString != "")
+                            {
+                                // Add the filename and string to the results list
+                                results.Add(new Tuple<string, string>(file, returnedString));
+                            }
                         }
                     });
 
@@ -123,39 +135,7 @@ namespace TaskB
                 }
 
                 // Clear the list of threads
-                threads = new ConcurrentBag<System.Threading.Thread>();
-
-                // Assign numericUpDownBefore, numericUpDownAfter and text of stringbox to variables
-                int before = (int)numericUpDownBefore.Value;
-                int after = (int)numericUpDownAfter.Value;
-                string stringBoxText = StringBox.Text;
-
-                // Loop through all files
-                foreach (string file in files)
-                {
-                    // Create a new thread
-                    System.Threading.Thread thread = new System.Threading.Thread(() =>
-                    {
-                        // Create local variable to hold returned string
-                        string returnedString = "";
-
-                        // Assign returned string to local variable
-                        returnedString = FileReader.ReadFileAndReturnString(file, stringBoxText, before, after);
-
-                        // Read from file and check if returned string is not empty
-                        if (returnedString != "")
-                        {
-                            // Add the filename and string to the results list
-                            results.Add(new Tuple<string, string>(file, returnedString));
-                        }
-                    });
-
-                    // Start the thread
-                    thread.Start();
-
-                    // Add the thread to the list of threads
-                    threads.Add(thread);
-                }
+                threads.Clear();
 
                 // Wait for threads to finish
                 foreach (System.Threading.Thread thread in threads)
@@ -163,6 +143,9 @@ namespace TaskB
                     thread.Join();
                 }
 
+                // Log the current time
+                Logger.Log($"Search finished in {stopwatch.ElapsedMilliseconds}ms");
+                
                 // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
                 foreach (Tuple<string, string> result in results)
                 {
@@ -185,40 +168,31 @@ namespace TaskB
                 foreach (string filetype in SelectedFiletypes)
                 {
                     // Loop through found files of filetype
-                    foreach (string file in Directory.GetFiles(FolderPath, $"*.{filetype}").ToArray())
+                    foreach (string file in Directory.GetFiles(FolderPath, $"*{filetype}"))
                     {
-                        // Add the file to the list of files
-                        files.Add(file);
+                        // Assign return value of FileReader.ReadFileAndReturnString to variable
+                        string returnedString = FileReader.ReadFileAndReturnString(file, StringBox.Text, (int)numericUpDownBefore.Value, (int)numericUpDownAfter.Value);
+                        
+                        // Check if file contains stringBoxText
+                        if (returnedString != "")
+                        {
+                            // Add the filename and string to the results list
+                            results.Add(new Tuple<string, string>(file, returnedString));
+                        }
                     }
                 }
 
-                // Loop through all files
-                foreach (string file in files)
+                // Log the current time
+                Logger.Log($"Search finished in {stopwatch.ElapsedMilliseconds}ms");
+
+                // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
+                foreach (Tuple<string, string> result in results)
                 {
-                    // Create local variable to hold returned string
-                    string returnedString = "";
+                    // Add the panel to the flow layout panel
+                    flowLayoutPanel1.Controls.Add(new FoundInFilePanel(result.Item1, result.Item2));
 
-                    // Assign returned string to local variable
-                    returnedString = FileReader.ReadFileAndReturnString(file, StringBox.Text,
-                        (int)numericUpDownBefore.Value,
-                        (int)numericUpDownAfter.Value);
-
-                    // Check if returned string is not empty
-                    if (returnedString != "")
-                    {
-                        // Add the filename and string to the results list
-                        results.Add(new Tuple<string, string>(file, returnedString));
-                    }
-
-                    // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
-                    foreach (Tuple<string, string> result in results)
-                    {
-                        // Add the panel to the flow layout panel
-                        flowLayoutPanel1.Controls.Add(new FoundInFilePanel(result.Item1, result.Item2));
-
-                        // Add 1 to foundCount
-                        foundCount++;
-                    }
+                    // Add 1 to foundCount
+                    foundCount++;
                 }
             }
 
@@ -233,6 +207,9 @@ namespace TaskB
 
             // Set IsSearching to false
             IsSearching = false;
+
+            // Set search button text to "Search"
+            SearchButton.Text = "Search";
         }
 
         public MainWindow()
