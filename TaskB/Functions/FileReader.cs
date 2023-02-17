@@ -27,6 +27,7 @@ namespace TaskB
                 textToReturn =
                     fileText.Substring(index - lengthBefore, textToFind.Length + lengthBefore + lengthAfter);
             }
+            Logger.Log($"Read file {file} and found {textToReturn}");
             return textToReturn;
         }
     }

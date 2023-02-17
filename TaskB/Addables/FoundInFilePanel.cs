@@ -7,13 +7,15 @@ namespace TaskB.Addables
 {
     public partial class FoundInFilePanel : UserControl
     {
-        public FoundInFilePanel(string FileName, string StringFound)
+        public FoundInFilePanel(string fileName, string stringFound)
         {
             InitializeComponent();
+            
+            AutoScroll = true;
 
             // Create a label for "File Name"
             Label lblFileName = new Label();
-            lblFileName.Text = FileName;
+            lblFileName.Text = fileName;
             lblFileName.Dock = DockStyle.Top;
             lblFileName.BorderStyle = BorderStyle.FixedSingle;
             lblFileName.ForeColor = Color.Black;
@@ -22,7 +24,7 @@ namespace TaskB.Addables
 
             // Create a label for "STRING FOUND"
             Label lblStringFound = new Label();
-            lblStringFound.Text = StringFound;
+            lblStringFound.Text = stringFound;
             lblStringFound.Dock = DockStyle.Bottom;
             lblStringFound.TextAlign = ContentAlignment.MiddleCenter;
             lblStringFound.AutoSize = false;
@@ -32,7 +34,7 @@ namespace TaskB.Addables
             Button btnOpenFile = new Button();
             btnOpenFile.Text = "OPEN FILE";
             btnOpenFile.Dock = DockStyle.Bottom;
-            btnOpenFile.Click += (sender, e) => { System.Diagnostics.Process.Start(FileName); };
+            btnOpenFile.Click += (sender, e) => { System.Diagnostics.Process.Start(fileName); };
 
             // Create a panel to hold the labels and button
             Panel pnlContainer = new Panel();

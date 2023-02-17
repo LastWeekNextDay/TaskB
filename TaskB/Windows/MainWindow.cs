@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -79,20 +80,20 @@ namespace TaskB
             System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
 
-            // Create an empty string array for files
-            string[] files = Array.Empty<string>();
-
-            // Create a list that holds the filename and the string that was found
-            List<(string, string)> results = new List<(string, string)>();
-
             // Create variable for number of found string
             int foundCount = 0;
 
             // Check if multithreading is checked
             if (MultithreadCheckBox.Checked)
             {
-                // Create a list of threads
-                List<System.Threading.Thread> threads = new List<System.Threading.Thread>();
+                // Create an thread-safe list of files
+                ConcurrentBag<string> files = new ConcurrentBag<string>();
+
+                // Create a thread-safe list that holds the filename and the string that was found
+                ConcurrentBag<Tuple<string, string>> results = new ConcurrentBag<Tuple<string, string>>();
+
+                // Create a thread-safe list of threads
+                ConcurrentBag<System.Threading.Thread> threads = new ConcurrentBag<System.Threading.Thread>();
 
                 // Loop through all filetypes
                 foreach (string filetype in SelectedFiletypes)
@@ -100,9 +101,12 @@ namespace TaskB
                     // Create a new thread
                     System.Threading.Thread thread = new System.Threading.Thread(() =>
                     {
-                        // Add all files with the current file type to the files array
-                        files = files.Concat(Directory.GetFiles(FolderPath, $"*{filetype}", SearchOption.TopDirectoryOnly))
-                            .ToArray();
+                        // Loop through found files of filetype
+                        foreach (string file in Directory.GetFiles(FolderPath, $"*.{filetype}").ToArray())
+                        {
+                            // Add the file to the list of files
+                            files.Add(file);
+                        }
                     });
 
                     // Start the thread
@@ -119,7 +123,7 @@ namespace TaskB
                 }
 
                 // Clear the list of threads
-                threads.Clear();
+                threads = new ConcurrentBag<System.Threading.Thread>();
 
                 // Assign numericUpDownBefore, numericUpDownAfter and text of stringbox to variables
                 int before = (int)numericUpDownBefore.Value;
@@ -132,11 +136,17 @@ namespace TaskB
                     // Create a new thread
                     System.Threading.Thread thread = new System.Threading.Thread(() =>
                     {
+                        // Create local variable to hold returned string
+                        string returnedString = "";
+
+                        // Assign returned string to local variable
+                        returnedString = FileReader.ReadFileAndReturnString(file, stringBoxText, before, after);
+
                         // Read from file and check if returned string is not empty
-                        if (FileReader.ReadFileAndReturnString(file, stringBoxText, before, after) != "")
+                        if (returnedString != "")
                         {
                             // Add the filename and string to the results list
-                            results.Add((file, stringBoxText));
+                            results.Add(new Tuple<string, string>(file, returnedString));
                         }
                     });
 
@@ -153,40 +163,63 @@ namespace TaskB
                     thread.Join();
                 }
 
-                // Clear the list of threads
-                threads.Clear();
+                // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
+                foreach (Tuple<string, string> result in results)
+                {
+                    // Add the panel to the flow layout panel
+                    flowLayoutPanel1.Controls.Add(new FoundInFilePanel(result.Item1, result.Item2));
+
+                    // Add 1 to foundCount
+                    foundCount++;
+                }
             }
             else
             {
+                // Create a list of files
+                List<string> files = new List<string>();
+
+                // Create a list that holds the filename and the string that was found
+                List<Tuple<string, string>> results = new List<Tuple<string, string>>();
+
                 // Loop through all file types
                 foreach (string filetype in SelectedFiletypes)
                 {
-                    // Add all files with the current file type to the files array
-                    files = files.Concat(Directory.GetFiles(FolderPath, $"*{filetype}", SearchOption.TopDirectoryOnly))
-                        .ToArray();
+                    // Loop through found files of filetype
+                    foreach (string file in Directory.GetFiles(FolderPath, $"*.{filetype}").ToArray())
+                    {
+                        // Add the file to the list of files
+                        files.Add(file);
+                    }
                 }
 
                 // Loop through all files
                 foreach (string file in files)
                 {
+                    // Create local variable to hold returned string
+                    string returnedString = "";
+
+                    // Assign returned string to local variable
+                    returnedString = FileReader.ReadFileAndReturnString(file, StringBox.Text,
+                        (int)numericUpDownBefore.Value,
+                        (int)numericUpDownAfter.Value);
+
                     // Check if returned string is not empty
-                    if (FileReader.ReadFileAndReturnString(file, StringBox.Text, (int)numericUpDownBefore.Value,
-                            (int)numericUpDownAfter.Value) != "")
+                    if (returnedString != "")
                     {
                         // Add the filename and string to the results list
-                        results.Add((file, StringBox.Text));
+                        results.Add(new Tuple<string, string>(file, returnedString));
+                    }
+
+                    // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
+                    foreach (Tuple<string, string> result in results)
+                    {
+                        // Add the panel to the flow layout panel
+                        flowLayoutPanel1.Controls.Add(new FoundInFilePanel(result.Item1, result.Item2));
+
+                        // Add 1 to foundCount
+                        foundCount++;
                     }
                 }
-            }
-
-            // Go through all results, create FoundInFilePanel using result info and add to flow layout panel
-            foreach ((string, string) result in results)
-            {
-                // Add the panel to the flow layout panel
-                flowLayoutPanel1.Controls.Add(new FoundInFilePanel(result.Item1, result.Item2));
-
-                // Add 1 to foundCount
-                foundCount++;
             }
 
             // Stop timer
@@ -194,7 +227,7 @@ namespace TaskB
 
             // Change runtime time text to show time taken
             RuntimeTimeTextLabel.Text = $"{stopwatch.ElapsedMilliseconds} ms";
-            
+
             // Change found count text to show number of found strings
             countFoundLabel.Text = foundCount.ToString();
 

@@ -14,6 +14,9 @@ namespace TaskB
         [STAThread]
         static void Main()
         {
+            // set the LOG_FILE_PATH of Logger as current directory + log.txt
+            Logger.LOG_FILE_PATH = Environment.CurrentDirectory + "\\log.txt";
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());
