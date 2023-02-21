@@ -50,8 +50,8 @@ namespace TaskB.Functions
                         // Assign return value of FileReader.ReadFileAndReturnString to variable
                         string returnedString = FileReader.ReadFileAndReturnString(file, StringToSearch,
                             CharactersBefore, CharactersAfter);
-                        // Check if file contains stringBoxText
-                        if (returnedString != "")
+                        // Check if file contains string
+                        if (!string.IsNullOrEmpty(returnedString))
                         {
                             // Add the filename and string to the results list
                             results.Add(new Tuple<string, string>(file, returnedString));
@@ -91,8 +91,8 @@ namespace TaskB.Functions
                     string returnedString =
                         FileReader.ReadFileAndReturnString(file, StringToSearch, CharactersBefore, CharactersAfter);
 
-                    // Check if file contains stringBoxText
-                    if (returnedString != "")
+                    // Check if file contains string
+                    if (!string.IsNullOrEmpty(returnedString))
                     {
                         // Add the filename and string to the results list
                         results.Add(new Tuple<string, string>(file, returnedString));

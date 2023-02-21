@@ -89,6 +89,9 @@ namespace TaskB.Windows
 
             // Create variable for number of found string
             var foundCount = 0;
+            
+            // Suspend layout of flow layout panel
+            flowLayoutPanel1?.SuspendLayout();
 
             // Check if multithreading is checked
             if (MultithreadCheckBox.Checked)
@@ -128,15 +131,11 @@ namespace TaskB.Windows
                 }
             }
             
-            // Create dummy label to add to flow layout panel to make sure the last panel is not cut off
-            Label dummyLabel = new Label();
-            dummyLabel.Width = 0;
-            dummyLabel.Height = 0;
-            dummyLabel.Margin = new Padding(0, 0, 0, 0);
-
-            flowLayoutPanel1?.Controls.Add(dummyLabel);
-            flowLayoutPanel1?.SetFlowBreak(dummyLabel, true);
-
+            // TODO: Fix flow layout not displaying all panels
+            
+            // Resume layout of flow layout panel
+            flowLayoutPanel1?.ResumeLayout();
+            
             // Stop timer
             stopwatch.Stop();
 

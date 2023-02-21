@@ -52,12 +52,6 @@
         <Compile Include="Addables\FoundInFilePanel.Designer.cs">
           <DependentUpon>FoundInFilePanel.cs</DependentUpon>
         </Compile>
-        <Compile Include="Addables\FoundPanel.cs">
-          <SubType>UserControl</SubType>
-        </Compile>
-        <Compile Include="Addables\FoundPanel.Designer.cs">
-          <DependentUpon>FoundPanel.cs</DependentUpon>
-        </Compile>
         <Compile Include="Functions\DirectoryManager.cs" />
         <Compile Include="Functions\FileReader.cs" />
         <Compile Include="Functions\Logger.cs" />
@@ -79,9 +73,6 @@
         </Compile>
         <EmbeddedResource Include="Addables\FoundInFilePanel.resx">
           <DependentUpon>FoundInFilePanel.cs</DependentUpon>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Addables\FoundPanel.resx">
-          <DependentUpon>FoundPanel.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
