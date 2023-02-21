@@ -137,12 +137,6 @@ namespace TaskB
                 // Clear the list of threads
                 threads.Clear();
 
-                // Wait for threads to finish
-                foreach (System.Threading.Thread thread in threads)
-                {
-                    thread.Join();
-                }
-
                 // Log the current time
                 Logger.Log($"Search finished in {stopwatch.ElapsedMilliseconds}ms");
                 
