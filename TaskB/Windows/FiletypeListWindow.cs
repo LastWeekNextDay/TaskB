@@ -1,26 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace TaskB
+namespace TaskB.Windows
 {
     public partial class FiletypeListWindow : Form
     {
-        private string[] _fileTypes;
-        public FiletypeListWindow(string[] fileTypes, string[] selectedFileTypes)
+        public FiletypeListWindow(IEnumerable<string> fileTypes, IEnumerable<string> selectedFileTypes)
         {
             InitializeComponent();
-            // Assign fileTypes to FileTypes
-            _fileTypes = fileTypes;
             // Add file types to checkedListBox
-            checkedListBox.Items.AddRange(_fileTypes);
+            // ReSharper disable once CoVariantArrayConversion
+            checkedListBox.Items.AddRange(fileTypes.ToArray());
             // Check all selected file types
-            foreach (string selectedFileType in selectedFileTypes)
+            foreach (var selectedFileType in selectedFileTypes)
             {
                 checkedListBox.SetItemChecked(checkedListBox.Items.IndexOf(selectedFileType), true);
             }
         }
-        
+
         private void CANCELButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -32,13 +31,15 @@ namespace TaskB
             // If no file types selected, do not close window
             if (checkedListBox.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Please select at least one file type.", "No file types selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Please select at least one file type.", @"No file types selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             DialogResult = DialogResult.OK;
             Close();
         }
-        
+
         public string[] ReturnCheckedItems()
         {
             return checkedListBox.CheckedItems.Cast<string>().ToArray();

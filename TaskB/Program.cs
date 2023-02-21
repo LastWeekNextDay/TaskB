@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TaskB.Functions;
+using TaskB.Windows;
 
 namespace TaskB
 {
@@ -15,8 +14,10 @@ namespace TaskB
         static void Main()
         {
             // set the LOG_FILE_PATH of Logger as current directory + log.txt
-            Logger.LOG_FILE_PATH = Environment.CurrentDirectory + "\\log.txt";
-            
+            Logger.LogFilePath = Environment.CurrentDirectory + "\\log.txt";
+            // set some available file types
+            GlobalVar.AvailableFiletypes = new[] { ".txt", ".cfg", ".csv", ".ini", ".log", ".xml" };
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());

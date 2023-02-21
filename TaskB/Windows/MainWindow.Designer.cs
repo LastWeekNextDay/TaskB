@@ -1,4 +1,4 @@
-﻿namespace TaskB
+﻿namespace TaskB.Windows
 {
     partial class MainWindow
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TaskB
+namespace TaskB.Windows
 {
     partial class FiletypeListWindow
     {

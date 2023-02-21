@@ -2,14 +2,13 @@
 
 namespace TaskB.Addables
 {
-    partial class FoundInFilePanel
+    sealed partial class FoundPanel
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
 
-        
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
@@ -32,11 +31,13 @@ namespace TaskB.Addables
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
             // 
-            // FoundInFilePanel
+            // FoundPanel
             // 
-            this.Name = "FoundInFilePanel";
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "FoundPanel";
+            this.Size = new System.Drawing.Size(553, 298);
             this.ResumeLayout(false);
         }
 

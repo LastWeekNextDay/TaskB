@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskB
+namespace TaskB.Functions
 {
     public static class FileReader
     {
